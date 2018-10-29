@@ -1,0 +1,10 @@
+---
+- import_playbook: users_and_groups.yml
+- import_playbook: system_packages.yml
+- import_playbook: system_config.yml
+- import_playbook: logging.yml
+- import_playbook: database.yml
+- import_playbook: application.yml
+- import_playbook: httpd.yml
+- import_playbook: uwsgi.yml
+- import_playbook: maintenance.yml

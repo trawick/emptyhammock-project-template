@@ -1,0 +1,7 @@
+[run]
+branch = true
+omit = manage.py, env/*, env-deploy/*, */*migrations/*, */settings/*, */wsgi.py
+source = .
+
+[report]
+show_missing = true

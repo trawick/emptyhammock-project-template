@@ -1,0 +1,2 @@
+[webservers]
+default ansible_user=ubuntu ansible_ssh_host=127.0.0.1 ansible_ssh_port=myproject-vagrant-ssh-port ansible_ssh_private_key_file=../.vagrant/machines/default/virtualbox/private_key

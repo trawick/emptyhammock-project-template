@@ -1,0 +1,5 @@
+---
+users:
+  - name: your-user-id
+    public_key:
+      - ssh-rsa YOUR-SSH-PUBLIC-KEY

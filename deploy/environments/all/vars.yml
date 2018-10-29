@@ -1,0 +1,20 @@
+---
+repo_branch: master
+admin_email: myproject-info@example.com
+project_name: myproject
+project_user: "{{ project_name }}"
+project_db: "{{ project_name }}"
+pg_user: "{{ project_name }}"
+
+project_dir: "/home/{{ project_user }}/{{ project_name }}"
+source_dir: "{{ project_dir }}/source"
+script_dir: "{{ project_dir }}/scripts"
+certbot_dir: "{{ project_dir }}/certbot"
+static_dir: "{{ project_dir }}/static"
+media_dir: "{{ project_dir }}/media"
+virtualenv_dir: "{{ project_dir }}/env"
+
+application_port: 3001
+log_dir: /var/log/django-{{ project_name }}
+log_group: "{{ project_name }}-loggers"
+log_dir_owner: www-data

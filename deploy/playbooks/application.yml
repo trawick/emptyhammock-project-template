@@ -1,0 +1,21 @@
+---
+- hosts: webservers
+  become: true
+  become_user: "{{ project_user }}"
+  roles:
+    - application
+- hosts: webservers
+  become: true
+  become_user: root
+  tasks:
+    - name: check if application needs to be restarted
+      stat: path={{ project_dir }}/restart-me
+      register: restart_file
+
+    - name: restart application
+      service: name={{ project_name }}-app state=restarted
+      when: restart_file.stat.exists
+
+    - name: delete restart file
+      file: path={{ project_dir }}/restart-me state=absent
+      when: restart_file.stat.exists

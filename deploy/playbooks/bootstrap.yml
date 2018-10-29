@@ -1,0 +1,6 @@
+---
+# For bootstrapping users, Ansible connects as root.
+- hosts: webservers
+  become: false
+  roles:
+    - users_and_groups
