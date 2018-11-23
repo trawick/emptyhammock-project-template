@@ -2,6 +2,7 @@
 
 * Remove `compare.py`; that's a script to use from this repo to try to compare
   with a consuming project.
+* Remove `docs/your_project.md` and the link to it in `README.md` (in TOC).
 * Create and activate your deployment virtualenv (described later), so that
   you can encrypt your Ansible vault files.
 * Change "myproject" to your project name or other project-specific value,
@@ -29,4 +30,4 @@
 * Push to a new repo in Github.
 * Configure the public deploy key in Github.
 * Optional: Create file `.vault_pass` to store your Ansible vault password.
-
+* Fill in the "Deviations" and "Project-specific details" sections of `README.md`.
