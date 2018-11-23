@@ -43,6 +43,13 @@ Differences between this project and the standard project template:
 - Vagrant host ssh port: 4567
 - Vagrant host https port: 4568
 
+## Development system requirements
+
+- `jq` command, for running `./manage.py` on the server
+  - Ubuntu: `sudo apt install jq`
+- `virtualenv` command, for creating Python virtual environments
+- PostgreSQL server and CLI, for your development and test database
+
 ## Creating virtual environments
 
 A developer will need two separate virtual environments to manage all aspects
@@ -82,7 +89,7 @@ Run `. env-deploy/bin/activate` before running any of the following:
 - `./get_db_dump.sh`
 - `./refresh_db.sh`
 - `./get_media.sh`
-- ` ./remote_manage.sh`
+- `./remote_manage.sh`
 
 Your development environment
 ============================
@@ -147,22 +154,12 @@ $ ./run_tests.sh
 ## Loading data from the cloud server
 
 Once the cloud server is running, its database and media tree can be synced to
-your development environment.
+your development environment with the following commands, described under
+[Server interactions](#server-interactions):
 
-### Loading a copy of the server database
-
-```bash
-$ . env-deploy/bin/activate
-$ ./get_db_dump.sh {production|staging|vagrant}
-$ ./refresh_db.sh
-```
-
-### Syncing with the server media tree
-
-```bash
-$ . env-deploy/bin/activate
-$ ./get_media.sh {production|staging|vagrant}
-```
+- `./get_db_dump.sh`
+- `./refresh_db.sh`
+- `./get_media.sh`
 
 Server interactions
 ===================
@@ -210,8 +207,6 @@ installed.
 Running management commands
 ---------------------------
 
-The `jq` command must be installed on the client system.  (`sudo apt install jq`)
-
 Use ``remote_manage.sh``, as in the following examples:
 
 ```bash
@@ -234,4 +229,21 @@ Use ``remote_manage.sh``, as in the following examples:
     Type "help", "copyright", "credits" or "license" for more information.
     (InteractiveConsole)
     >>>
+```
+
+Loading a copy of the server database into your dev database
+------------------------------------------------------------
+
+```bash
+$ . env-deploy/bin/activate
+$ ./get_db_dump.sh {production|staging|vagrant}
+$ ./refresh_db.sh
+```
+
+Syncing your dev media tree with the server media tree
+------------------------------------------------------
+
+```bash
+$ . env-deploy/bin/activate
+$ ./get_media.sh {production|staging|vagrant}
 ```
