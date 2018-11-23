@@ -8,6 +8,7 @@
 1. [Project-specific details](#project-specific-details)
 1. [Creating virtual environments](#creating-virtual-environments)
 1. [Your development environment](#your-development-environment)
+1. [Common server setup](docs/common_server_setup.md)
 1. [Vagrant server setup](docs/vagrant_server_setup.md)
 1. [Cloud server setup](docs/cloud_server_setup.md)
 1. [Server interactions](#server-interactions)

@@ -1,6 +1,9 @@
 Initial setup for VPS
 ---------------------
 
+The instructions only mention a `production` server.  Repeat for `staging` if
+appropriate.
+
 ### EC2 hints
 
 - Create a new EC2 instance.  You'll need the key pair for the instance,

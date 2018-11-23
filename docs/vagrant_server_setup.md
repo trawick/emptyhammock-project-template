@@ -12,7 +12,10 @@ Install Vagrant 1.8.7 or later in order to test a Vagrant-managed server.
 config.vm.network :forwarded_port, guest: 22, host: 4567, id: "ssh"
 ```
 
-This must match the value of `ansible_ssh_port` in `deploy/inventory/vagrant`.
+If necessary, assign a unique ssh host port number that is different
+from all the other Vagrant configurations on your development system.
+
+Edit `deploy/inventory/vagrant` and set `ansible_ssh_port` to the same value.
 
 Thus, use `ssh -p 4567 127.0.0.1` when connecting to the Vagrant-managed
 server.
@@ -39,6 +42,9 @@ config.vm.network :forwarded_port, guest: 443, host: 4568
 ```
 
 (In this example, the port is 4568.)
+
+If necessary, assign a unique https host port number that is different
+from all the other Vagrant configurations on your development system.
 
 The URL for accessing the application in the Vagrant-managed server is
 thus `https://vagrant-myproject.com:4568/`.  This uses a self-signed certificate,
