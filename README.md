@@ -1,43 +1,36 @@
-# myproject (change this section in project doc)
+# myproject
 
-## Making it your own project (delete this section in project doc)
+# Table of Contents
 
-* Remove `compare.py`; that's a script to use from this repo to try to compare
-  with a consuming project.
-* Create and activate your deployment virtualenv (described later), so that
-  you can encrypt your Ansible vault files.
-* Change "myproject" to your project name or other project-specific value,
-  everywhere!  File names and contents!
-* Edit `Vagrantfile` and assign unique port numbers for ssh and https.
-* Edit `deploy/inventory/vagrant` and set the ssh port number to the same value.
-* Edit `deploy/inventory/production` and set the production IP address.
-* Generate a deploy key.
-  (Hint: `ssh-keygen -t rsa -b 4096 -C "email@example.com" -f project-deploy-key`)
-* Edit `deploy/environments/vagrant/secrets.yml` to define these variables:
-  * `SECRET_DB_PASSWORD`
-  * `SECRET_DJANGO_SECRET_KEY`
-  * `SECRET_GITHUB_DEPLOY_KEY_PRIVATE`
-  * `SECRET_GITHUB_DEPLOY_KEY_PUBLIC` (not used on the server, but it helps to be
-     able to find the corresponding public key)
-* Provide values for the same variables in `deploy/environments/production/secrets.yml`.
-* Run `ansible-vault encrypt deploy/environments/vagrant/secrets.yml`.
-* Run `ansible-vault encrypt deploy/environments/production/secrets.yml`.
-* `git init`
-* `git add --dry-run .`
-  Ensure that your deploy key or other unencrypted secrets are NOT listed.  Then add 
-  anything else unexpected to `.gitignore`, or just delete it.
-* `git add .`
-* `git commit -a`
-* Push to a new repo in Github.
-* Configure the public deploy key in Github.
-* Optional: Create file `.vault_pass` to store your Ansible vault password.
+1. [Making it your own project](docs/your_project.md)
+1. [Deviations from project template](#deviations)
+1. [Project-specific details](#project-specific-details)
+1. [Creating virtual environments](#creating-virtual-environments)
+1. [Your development environment](#your-development-environment)
 
-Managing your development environment
-=====================================
+## Deviations
 
-## .env
+Differences between this project and the standard project template:
 
-* Set `DJANGO_SETTINGS_MODULE` to `myproject.settings.local`
+- *list any non-standard aspects here*
+
+## Project-specific details
+
+
+
+## Creating virtual environments
+
+A developer will need two separate virtual environments to manage all aspects
+of the project.  One of these is for running the code locally; the other is to
+deploy to a Vagrant or remote environment.  The dependencies for dev vs. deploy
+are separated
+
+- to support different versions of Python for the different roles
+- because the Python requirements for the two roles are so different
+
+The instructions throughout the README refer to `./env` and `./env-deploy` as
+the locations of the virtual environments.  They can of course be created
+elsewhere.
 
 ### Development virtualenv
 
@@ -47,13 +40,37 @@ $ . env/bin/activate
 $ pip install -r requirements/local.txt
 ```
 
-Run `. env/bin/activate` whenever running `./manage.py`.
+Run `. env/bin/activate` before running `./manage.py` or `./run_tests.sh`.
+
+### Deployment virtualenv
+
+The deployment virtualenv is used when deploying or transferring data from the
+server or when running commands on the server.
+
+```
+$ virtualenv -p `which python2.7` ./env-deploy
+$ . env-deploy/bin/activate
+$ pip install -r deploy/requirements.txt
+    ...
+```
+
+Your development environment
+============================
+
+## .env
+
+The `manage.py` command reads the `.env` file at startup.  At a minimum, `.env`
+must indicate which Django settings module to use.
+
+```bash
+echo `DJANGO_SETTINGS_MODULE=myproject.settings.local` > .env
+```
 
 ## Database setup
 
 As user `postgres`:
 
-```bash
+```
     $ createuser --createdb MYPROJECTNAME
     $ psql
     postgres=# alter user MYPROJECTNAME with password 'MYDBPASS';
@@ -64,6 +81,7 @@ As user `postgres`:
 As developer:
 ```bash
     $ PGHOST=localhost createdb -U MYPROJECTNAME -E UTF-8 MYPROJECTNAME
+    $ . env/bin/activate
     $ ./manage.py migrate
     $ ./manage.py createsuperuser
     ...
@@ -72,14 +90,16 @@ As developer:
 ## Loading a copy of the server database
 
 ```bash
-    $ ./get_db_dump.sh {production|vagrant}
+    $ . env-deploy/bin/activate
+    $ ./get_db_dump.sh {production|staging|vagrant}
     $ ./refresh_db.sh
 ```
 
 ## Syncing with the server media tree
 
 ```bash
-    $ ./get_media.sh {production|vagrant}
+    $ . env-deploy/bin/activate
+    $ ./get_media.sh {production|staging|vagrant}
 ```
 
 Managing Vagrant and production servers
@@ -87,16 +107,6 @@ Managing Vagrant and production servers
 
 General preparation
 -------------------
-
-Deployment is based on Ansible, which will be installed in a separate virtualenv
-using `deploy/requirements.txt`, as follows:
-
-```
-$ virtualenv -p `which python2.7` ./env-deploy
-$ . env-deploy/bin/activate
-$ pip install -r deploy/requirements.txt
-    ...
-```
 
 Activate the virtualenv for deployment before running any of the shell commands
 described in this section.
@@ -162,7 +172,7 @@ fatal: [default]: UNREACHABLE! => {"changed": false, "msg": "SSH Error: data cou
 When you ssh directly like Ansible would have done, you'll see the issue.  Remove
 the old host key as instructed.
 
-```bash
+```
 $ ssh -i .vagrant/machines/default/virtualbox/private_key -p 4577 vargrant@127.0.0.1
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
@@ -293,6 +303,7 @@ Deploying
 ---------
 
 ```bash
+$ . env-deploy/bin/activate
 $ ./deploy.sh vagrant
 ...
 $ ./deploy.sh production
@@ -301,7 +312,7 @@ $ ./deploy.sh production
 On the first run of `deploy.sh` after Ansible requirements have been updated,
 you'll see a message like the following:
 
-```bash
+```
 $ ./deploy.sh vagrant
 - application (0.0.5) is already installed, skipping.
 - httpd (0.0.2) is already installed, skipping.
@@ -327,6 +338,7 @@ The `jq` command must be installed on the client system.  (`sudo apt install jq`
 Use ``remote_manage.sh``, as in the following examples:
 
 ```
+    $ . env-deploy/bin/activate
     $ ./remote_manage.sh production showmigrations
     Running as user myproject...
     admin
