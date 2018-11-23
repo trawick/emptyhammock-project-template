@@ -175,6 +175,10 @@ server.  Afterwards, you can run the commands in this section as well as log in
 via `ssh`.  Ensure that the username in `devs.yml` matches the username on your
 client system, as this is assumed by some of the commands.
 
+Optional: Create file `.vault_pass` to store your Ansible vault password.  This
+will avoid password prompts when deploying or running other commands that need
+access to the secrets file for an environment.
+
 Deploying
 ---------
 
