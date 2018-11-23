@@ -47,11 +47,8 @@ Differences between this project and the standard project template:
 
 A developer will need two separate virtual environments to manage all aspects
 of the project.  One of these is for running the code locally; the other is to
-deploy to a Vagrant or remote environment.  The dependencies for dev vs. deploy
-are separated
-
-- to support different versions of Python for the different roles
-- because the Python requirements for the two roles are so different
+deploy to a Vagrant or remote environment.  (The dependencies for dev vs. deploy
+are independent.)
 
 The instructions throughout the README refer to `./env` and `./env-deploy` as
 the locations of the virtual environments.  They can of course be created
@@ -79,6 +76,14 @@ $ pip install -r deploy/requirements.txt
     ...
 ```
 
+Run `. env-deploy/bin/activate` before running any of the following:
+
+- `./deploy.sh`
+- `./get_db_dump.sh`
+- `./refresh_db.sh`
+- `./get_media.sh`
+- ` ./remote_manage.sh`
+
 Your development environment
 ============================
 
@@ -90,6 +95,9 @@ must indicate which Django settings module to use.
 ```bash
 echo `DJANGO_SETTINGS_MODULE=myproject.settings.local` > .env
 ```
+
+You can also define any other environment variables which are read by the
+server.
 
 ## Database setup
 
@@ -105,11 +113,35 @@ As user `postgres`:
 
 As developer:
 ```bash
-    $ PGHOST=localhost createdb -U MYPROJECTNAME -E UTF-8 MYPROJECTNAME
-    $ . env/bin/activate
-    $ ./manage.py migrate
-    $ ./manage.py createsuperuser
-    ...
+$ PGHOST=localhost createdb -U MYPROJECTNAME -E UTF-8 MYPROJECTNAME
+$ . env/bin/activate
+$ ./manage.py migrate
+...
+```
+
+## Creating a superuser
+
+(standard Django)
+
+```bash
+$ . env/bin/activate
+$ ./manage.py createsuperuser
+```
+
+## Running the development server
+
+(standard Django)
+
+```bash
+$ . env/bin/activate
+$ ./manage.py runserver 8000
+```
+
+## Running tests and `flake8`
+
+```bash
+$ . env/bin/activate
+$ ./run_tests.sh
 ```
 
 ## Loading data from the cloud server
@@ -120,16 +152,16 @@ your development environment.
 ### Loading a copy of the server database
 
 ```bash
-    $ . env-deploy/bin/activate
-    $ ./get_db_dump.sh {production|staging|vagrant}
-    $ ./refresh_db.sh
+$ . env-deploy/bin/activate
+$ ./get_db_dump.sh {production|staging|vagrant}
+$ ./refresh_db.sh
 ```
 
 ### Syncing with the server media tree
 
 ```bash
-    $ . env-deploy/bin/activate
-    $ ./get_media.sh {production|staging|vagrant}
+$ . env-deploy/bin/activate
+$ ./get_media.sh {production|staging|vagrant}
 ```
 
 Server interactions
