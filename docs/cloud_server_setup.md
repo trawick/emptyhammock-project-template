@@ -70,8 +70,6 @@ bootstrapping.
 
 Run the bootstrap step as follows:
 
-Only the `root` user will be available initially on a VPS, so 
-
 ```bash
 $ ./deploy/bootstrap.sh {production|staging} {root|other_user} [PEM_file]
 root password on server:
