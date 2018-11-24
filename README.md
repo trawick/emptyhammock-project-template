@@ -6,6 +6,7 @@
 1. [Overview](#overview)
 1. [Deviations from project template](#project-deviations)
 1. [Project-specific details](#project-specific-details)
+1. [Development system requirements](#development-system-requirements)
 1. [Creating virtual environments](#creating-virtual-environments)
 1. [Your development environment](#your-development-environment)
 1. [Common server setup](docs/common_server_setup.md)
@@ -29,6 +30,9 @@ managed independently (e.g., Amazon RDS).  Components:
 - Let's Encrypt for certificate management
 - npm for installing JavaScript dependencies and serving as a wrapper for JS
   builds
+- Out of the box, it assumes that
+  [emptyhammock-maintenance](https://github.com/trawick/emptyhammock-maintenance)
+  will be sued for various maintenance tasks.
 
 ## Project deviations
 
@@ -46,10 +50,14 @@ Differences between this project and the standard project template:
 
 ## Development system requirements
 
+- Python 2.7
+- Python 3.5 or 3.6
 - `jq` command, for running `./manage.py` on the server
   - Ubuntu: `sudo apt install jq`
 - `virtualenv` command, for creating Python virtual environments
 - PostgreSQL server and CLI, for your development and test database
+- Vagrant 1.8.7 or later, for testing a Vagrant-managed server
+  - This is typically used when testing new Ansible deployment logic.
 
 ## Creating virtual environments
 

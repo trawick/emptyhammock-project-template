@@ -1,8 +1,6 @@
 Initial setup for Vagrant
 -------------------------
 
-Install Vagrant 1.8.7 or later in order to test a Vagrant-managed server.
-
 #### ssh port configuration
 
 `Vagrantfile` has a command like the following which sets the ssh port
