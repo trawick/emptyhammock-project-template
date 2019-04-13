@@ -1,5 +1,5 @@
-Django==1.11.16
-  pytz==2018.5
+Django==1.11.20
+  pytz==2019.1
 psycopg2==2.7.5
 django-dotenv==1.4.1
 huey==1.10.3
