@@ -1,4 +1,4 @@
-Django==1.11.21
+Django==1.11.23
   pytz==2019.1
 psycopg2==2.7.7
 django-dotenv==1.4.1
