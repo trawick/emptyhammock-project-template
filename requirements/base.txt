@@ -1,7 +1,7 @@
-Django==1.11.27
-  pytz==2019.1
-psycopg2==2.7.7
+Django==2.2.17
+  pytz==2020.4
+psycopg2==2.8.6
 django-dotenv==1.4.1
-huey==2.0.1
-redis==3.2.1
-pip==18.1
+huey==2.3.0
+redis==3.5.3
+pip==19.3.1
