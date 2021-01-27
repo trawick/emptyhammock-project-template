@@ -9,6 +9,7 @@ node_modules
 env
 env-deploy
 *.retry
+.python-version
 .vault_pass
 .vagrant
 *.log

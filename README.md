@@ -32,7 +32,7 @@ managed independently (e.g., Amazon RDS).  Components:
   builds
 - Out of the box, it assumes that
   [emptyhammock-maintenance](https://github.com/trawick/emptyhammock-maintenance)
-  will be sued for various maintenance tasks.
+  will be used for various maintenance tasks.
 
 ## Project deviations
 
@@ -42,22 +42,25 @@ Differences between this project and the standard project template:
 
 ## Project-specific details
 
+(edit this)
+
 - Ubuntu version for deploy environments: 18.04
-- Server and development virtualenv Python version: 3.6
-- Deployment virtualenv Python version: 2.7
+- Server and development virtualenv Python version: 3.X
+- Deployment virtualenv Python version: 3.X
 - Vagrant host ssh port: 4567
 - Vagrant host https port: 4568
 
 ## Development system requirements
 
-- Python 2.7
-- Python 3.5 or 3.6
+- Python 3.X
 - `jq` command, for running `./manage.py` on the server
   - Ubuntu: `sudo apt install jq`
-- `virtualenv` command, for creating Python virtual environments
 - PostgreSQL server and CLI, for your development and test database
 - Vagrant 1.8.7 or later, for testing a Vagrant-managed server
   - This is typically used when testing new Ansible deployment logic.
+
+Recommendation: Use `pyenv` to manage Python interpreters.  Fill in `.python-version`
+in the root directory of the project.
 
 ## Creating virtual environments
 
@@ -73,7 +76,7 @@ elsewhere.
 ### Development virtualenv
 
 ```bash
-$ virtualenv -p `which python3.6` ./env
+$ python3 -m venv ./env
 $ . env/bin/activate
 $ pip install -r requirements/local.txt
 ```
@@ -85,8 +88,8 @@ Run `. env/bin/activate` before running `./manage.py` or `./run_tests.sh`.
 The deployment virtualenv is used when deploying or transferring data from the
 server or when running commands on the server.
 
-```
-$ virtualenv -p `which python2.7` ./env-deploy
+```bash
+$ python3 -m venv ./env-deploy
 $ . env-deploy/bin/activate
 $ pip install -r deploy/requirements.txt
     ...
