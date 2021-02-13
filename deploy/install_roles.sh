@@ -23,7 +23,12 @@ if ! ansible-galaxy install -r requirements.yml 2>&1 | tee "${TEMPFILE}"; then
 fi
 
 if grep "WARNING" "${TEMPFILE}" >/dev/null 2>&1; then
-    echo "Out of date package:" 1>&2
-    grep "WARNING" "${TEMPFILE}"
+    echo "" 1>&2
+    echo "Out of date packages:" 1>&2
+    echo "" 1>&2
+    grep "WARNING" "${TEMPFILE}" 1>&2
+    echo "" 1>&2
+    echo "Unless you have made local changes to the role, remove those directories" 1>&2
+    echo "from ./deploy/roles and try again." 1>&2
     exit 1
 fi
