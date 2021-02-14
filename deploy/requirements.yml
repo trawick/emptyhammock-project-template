@@ -1,6 +1,6 @@
 ---
 - src: https://github.com/trawick/emptyhammock-role-application
-  version: 0.0.5
+  version: 0.0.6
   name: application
 - src: https://github.com/trawick/emptyhammock-role-database
   version: 0.0.2
@@ -18,11 +18,11 @@
   version: 0.0.1
   name: system_config
 - src: https://github.com/trawick/emptyhammock-role-system-packages
-  version: 0.0.6
+  version: 0.0.8
   name: system_packages
 - src: https://github.com/trawick/emptyhammock-role-users-and-groups
   version: 0.0.3
   name: users_and_groups
 - src: https://github.com/trawick/emptyhammock-role-uwsgi
-  version: 0.0.4
+  version: 0.0.5
   name: uwsgi
