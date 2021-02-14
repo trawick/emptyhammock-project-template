@@ -10,6 +10,7 @@ env
 env-deploy
 *.retry
 .python-version
+.nvmrc
 .vault_pass
 .vagrant
 *.log
