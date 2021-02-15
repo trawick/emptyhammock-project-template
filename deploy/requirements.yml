@@ -18,7 +18,7 @@
   version: 0.0.1
   name: system_config
 - src: https://github.com/trawick/emptyhammock-role-system-packages
-  version: 0.0.8
+  version: 0.0.9
   name: system_packages
 - src: https://github.com/trawick/emptyhammock-role-users-and-groups
   version: 0.0.3
