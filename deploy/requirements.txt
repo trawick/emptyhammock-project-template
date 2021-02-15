@@ -1,13 +1,13 @@
 pip==21.0.1
 #
-ansible==2.10.6
+ansible==2.10.7
   ansible-base==2.10.5
-    cryptography==2.3
-      asn1crypto==0.23.0
-      cffi==1.14.4
-        pycparser==2.18
-      idna==2.6
-      six==1.11.0
+    cryptography==3.4.5
+      asn1crypto==1.4.0
+      cffi==1.14.5
+        pycparser==2.20
+      idna==2.10
+      six==1.15.0
     Jinja2==2.11.3
       MarkupSafe==1.1.1
     packaging==20.9
