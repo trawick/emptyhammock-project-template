@@ -1,6 +1,6 @@
 ---
 - src: https://github.com/trawick/emptyhammock-role-application
-  version: 0.0.6
+  version: 0.0.7
   name: application
 - src: https://github.com/trawick/emptyhammock-role-database
   version: 0.0.2
