@@ -10,3 +10,6 @@ for logger_name in LOGGING['loggers'].keys():
         lambda x: x != MAIL_HANDLER,
         logger['handlers']
     ))
+
+# Instead of trying to send emails through SMTP, write them to the console.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
