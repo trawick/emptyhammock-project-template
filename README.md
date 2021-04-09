@@ -123,16 +123,16 @@ server.
 As user `postgres`:
 
 ```bash
-    $ createuser --createdb MYPROJECTNAME
+    $ createuser --createdb MYPROJECT
     $ psql
-    postgres=# alter user MYPROJECTNAME with password 'MYDBPASS';
+    postgres=# alter user MYPROJECT with password 'MYDBPASS';
     ALTER ROLE
     postgres=# \q
 ```
 
 As developer:
 ```bash
-$ PGHOST=localhost createdb -U MYPROJECTNAME -E UTF-8 MYPROJECTNAME
+$ PGHOST=localhost createdb -U MYPROJECT -E UTF-8 MYPROJECT
 $ . env/bin/activate
 $ ./manage.py migrate
 ...
